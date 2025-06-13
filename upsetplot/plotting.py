@@ -532,7 +532,8 @@ class UpSet:
         handles, labels = ax.get_legend_handles_labels()
         if self._horizontal:
             # Make legend order match visual stack order
-            ax.legend(reversed(handles), reversed(labels))
+            ax.legend(list(reversed(handles)), list(reversed(labels)))
+
         else:
             ax.legend()
 
@@ -617,7 +618,7 @@ class UpSet:
         if value is None:
             if "_value" not in self._df.columns:
                 raise ValueError(
-                    "value cannot be set if data is a Series. " "Got %r" % value
+                    "value cannot be set if data is a Series. Got %r" % value
                 )
         else:
             if value not in self._df.columns:
@@ -992,7 +993,7 @@ class UpSet:
                 self._swapaxes(start_x, i - 0.4),
                 *self._swapaxes(end_x, 0.8),
                 facecolor=shading_style.get("facecolor", default_shading),
-                edgecolor=shading_style.get("edgecolor", None),
+                edgecolor=shading_style.get("edgecolor"),
                 ls=shading_style.get("linestyle", "-"),
                 lw=lw,
                 zorder=0,
